@@ -47,12 +47,12 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const newCat = req.body.name;
-    await Category.update( {category_name: newCat}, {
+    const catData = await Category.update( {category_name: newCat}, {
       where: {
         id: req.params.id
       }
     });
-    res.status(200).json({ 'message': 'Category updated successfully'});
+    res.status(200).json(catData);
   } catch(err) {
     res.status(400).json(err);
   };
@@ -60,12 +60,12 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async(req, res) => {
   try {
-    await Category.destroy({
+    const catData = await Category.destroy({
       where: {
         id: req.params.id
       }
     });
-    res.status(200).json({ 'message': 'category deleted successfully' });
+    res.status(200).json(catData);
   } catch(err) {
     res.status(400).json(err);
   };
